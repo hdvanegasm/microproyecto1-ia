@@ -9,6 +9,23 @@ package model;
  *
  * @author user
  */
+
+import net.sourceforge.jFuzzyLogic.FIS;
+
 public class FuzzyModel {
+    private static FIS model;
     
+    public static FIS getModel() {
+        if(model == null) {
+            String filePath = "model.fcl";
+            model = FIS.load(filePath);
+            return model;
+        } else {
+            return model;
+        }
+    }
+    
+    public static double getQuality() {
+        return 0;
+    }
 }
