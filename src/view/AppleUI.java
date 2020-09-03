@@ -2,8 +2,6 @@ package view;
 
 import javax.swing.*;
 import java.awt.*; // TO DO : Fix those imports.
-import java.util.Arrays;
-import javax.swing.border.EmptyBorder;
 /**
  *
  * @author pvillegasg
