@@ -9,17 +9,17 @@ package model;
  *
  * @author user
  */
-
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.rule.Rule;
 
 import java.util.List;
 
 public class FuzzyModel {
+
     private static FIS model;
-    
+
     public static FIS getModel() {
-        if(model == null) {
+        if (model == null) {
             // TODO Implement .fcl
             String filePath = "src/model/apple_model.fcl";
             model = FIS.load(filePath);
@@ -28,29 +28,28 @@ public class FuzzyModel {
             return model;
         }
     }
-    
-    private static FIS evaluateModel(
+
+    private static void evaluateModel(
             double size, double redLevel, double spots) {
         // TODO fix variable names
         FIS fuzzyModel = getModel();
         fuzzyModel.setVariable("size", size);
         fuzzyModel.setVariable("red_level", redLevel);
         fuzzyModel.setVariable("spots", spots);
-        
-        return fuzzyModel;
+        fuzzyModel.evaluate();
     }
-    
+
     public static double getQuality(
             double size, double redLevel, double spots) {
-        FIS fuzzyModel = evaluateModel(size, redLevel, spots);
-        return fuzzyModel.getVariable("quality").getLatestDefuzzifiedValue();
+        evaluateModel(size, redLevel, spots);
+        return getModel().getVariable("quality").getLatestDefuzzifiedValue();
     }
-    
+
     public static List<Rule> getRules(
             double size, double redLevel, double spots) {
-        FIS fuzzyModel = evaluateModel(size, redLevel, spots);
-        
-        return fuzzyModel
+        evaluateModel(size, redLevel, spots);
+
+        return getModel()
                 .getFunctionBlock("quality")
                 .getFuzzyRuleBlock("No1")
                 .getRules();
