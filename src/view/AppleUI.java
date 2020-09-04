@@ -24,7 +24,7 @@ public class AppleUI extends JFrame {
       
      
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.setPreferredSize(new Dimension(800, 600));
+      this.setPreferredSize(new Dimension(800, 700));
       this.pack();
       this.setLocationRelativeTo(null);
       this.setVisible(true);
@@ -37,7 +37,7 @@ public class AppleUI extends JFrame {
        systemTitle.setPreferredSize(new Dimension(300, 100));
        systemTitle.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        welcomeMenuPanel.add(systemTitle);
-       welcomeMenuPanel.setBounds(270, 0, 280, 80);
+       welcomeMenuPanel.setBounds(260, 0, 280, 80);
        welcomeMenuPanel.setBackground(BACKGROUND_COLOR);
        contentPanel.add(welcomeMenuPanel);
     }
@@ -45,16 +45,18 @@ public class AppleUI extends JFrame {
     
     public void createFormPanel() {
        JPanel formPanel = new JPanel();
-       formPanel.setLayout(new GridLayout(3,2));
+       GridLayout formPanelLayout = new GridLayout(3,2);
+       formPanelLayout.setVgap(5);
+       formPanel.setLayout(formPanelLayout);
      
-       JLabel labelInput1 = new JLabel("Input 1", SwingConstants.CENTER);
+       JLabel labelInput1 = new JLabel("Diameter", SwingConstants.LEFT);
        labelInput1.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        
-       JLabel labelInput2 = new JLabel("Input 2", SwingConstants.CENTER);
+       JLabel labelInput2 = new JLabel("Red intensity", SwingConstants.LEFT);
        labelInput2.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        
        
-       JLabel labelInput3 = new JLabel("Input 3", SwingConstants.CENTER);
+       JLabel labelInput3 = new JLabel("Spot Percentage", SwingConstants.LEFT);
        labelInput3.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        
        JTextField input1 = new JTextField("");
@@ -76,24 +78,30 @@ public class AppleUI extends JFrame {
     
    public void createActionsPanel() {
        JPanel buttonActionsPanel = new JPanel();
-       buttonActionsPanel.setLayout(new GridLayout(1,2));
+       GridLayout buttonsLayout = new GridLayout(1,2);
+       buttonsLayout.setHgap(25);
+       buttonActionsPanel.setLayout(buttonsLayout);
        
        JButton calculate = new JButton("Calculate");
+       calculate.setBackground(Color.WHITE);
+       calculate.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
        JButton getReport = new JButton("Get Report");
+       getReport.setBackground(Color.WHITE);
+       getReport.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
        
        buttonActionsPanel.add(calculate);
        buttonActionsPanel.add(getReport);
        
-       buttonActionsPanel.setBounds(270, 300, 300, 45);
+       buttonActionsPanel.setBounds(250, 300, 300, 45);
        buttonActionsPanel.setBackground(BACKGROUND_COLOR);
        contentPanel.add(buttonActionsPanel);
    }
    
    public void createResultsPanel() {
-       JTextArea textArea = new JTextArea (400, 100);
+       JTextArea textArea = new JTextArea (400, 250);
        JScrollPane resultsPanel = new JScrollPane(textArea);
        
-       resultsPanel.setBounds(220, 370, 400, 200);
+       resultsPanel.setBounds(200, 370, 400, 250);
        contentPanel.add(resultsPanel);
    }
    
