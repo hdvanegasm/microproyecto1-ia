@@ -40,14 +40,14 @@ public class FuzzyModel {
     }
 
     public static double getQuality(
-            double size, double redLevel, double spots) {
-        evaluateModel(size, redLevel, spots);
+            double size, double redColor, double spots) {
+        evaluateModel(size, redColor, spots);
         return getModel().getVariable("quality").getLatestDefuzzifiedValue();
     }
 
     public static List<Rule> getRules(
-            double size, double redLevel, double spots) {
-        evaluateModel(size, redLevel, spots);
+            double size, double redColor, double spots) {
+        evaluateModel(size, redColor, spots);
 
         return getModel()
                 .getFunctionBlock("quality")
