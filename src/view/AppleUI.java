@@ -2,6 +2,10 @@ package view;
 
 import javax.swing.*;
 import java.awt.*; // TO DO : Fix those imports.
+import java.awt.event.ActionListener;
+
+import controller.CalculateListener;
+import view.InputValidator;
 /**
  *
  * @author pvillegasg
@@ -10,6 +14,9 @@ public class AppleUI extends JFrame {
    private JPanel contentPanel;
    static final String MAIN_FONT = "Roboto";
    static final Color BACKGROUND_COLOR = new Color(204, 229, 255);
+   private JTextField diameter;
+   private JTextField spotsPercentage;
+   private JTextField redIntensity;
    
    public AppleUI() {
       super("Apple Expert System");
@@ -59,16 +66,19 @@ public class AppleUI extends JFrame {
        JLabel labelInput3 = new JLabel("Spot Percentage", SwingConstants.LEFT);
        labelInput3.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        
-       JTextField input1 = new JTextField("");
-       JTextField input2 = new JTextField("");
-       JTextField input3 = new JTextField("");
+       this.diameter = new JTextField("10");
+       this.diameter.setInputVerifier(new InputValidator());
+       this.spotsPercentage = new JTextField("10");
+       this.spotsPercentage.setInputVerifier(new InputValidator());
+       this.redIntensity = new JTextField("10");
+       this.redIntensity.setInputVerifier(new InputValidator());
        
        formPanel.add(labelInput1);
-       formPanel.add(input1);
+       formPanel.add(this.diameter);
        formPanel.add(labelInput2);
-       formPanel.add(input2);
+       formPanel.add(this.redIntensity);
        formPanel.add(labelInput3);
-       formPanel.add(input3);
+       formPanel.add(this.spotsPercentage);
         
        formPanel.setPreferredSize(new Dimension(300, 300));
        formPanel.setBounds(250, 100, 300, 150);
@@ -91,6 +101,14 @@ public class AppleUI extends JFrame {
        
        buttonActionsPanel.add(calculate);
        buttonActionsPanel.add(getReport);
+       
+       
+       
+       String diameter = this.diameter.getText();
+       String redIntensity = this.redIntensity.getText();
+       String spotsPercentage = this.spotsPercentage.getText();
+       
+       calculate.addActionListener(new CalculateListener(diameter, redIntensity, spotsPercentage));
        
        buttonActionsPanel.setBounds(250, 300, 300, 45);
        buttonActionsPanel.setBackground(BACKGROUND_COLOR);
