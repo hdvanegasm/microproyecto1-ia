@@ -2,6 +2,12 @@ package view;
 
 import javax.swing.*;
 import java.awt.*; // TO DO : Fix those imports.
+import java.awt.event.ActionListener;
+
+import controller.CalculateListener;
+import view.InputValidator;
+import java.util.List;
+import net.sourceforge.jFuzzyLogic.rule.Rule;
 /**
  *
  * @author pvillegasg
@@ -10,6 +16,10 @@ public class AppleUI extends JFrame {
    private JPanel contentPanel;
    static final String MAIN_FONT = "Roboto";
    static final Color BACKGROUND_COLOR = new Color(204, 229, 255);
+   private JTextField diameter;
+   private JTextField spotsPercentage;
+   private JTextField redIntensity;
+   private JTextArea textArea;
    
    public AppleUI() {
       super("Apple Expert System");
@@ -59,16 +69,19 @@ public class AppleUI extends JFrame {
        JLabel labelInput3 = new JLabel("Spot Percentage", SwingConstants.LEFT);
        labelInput3.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        
-       JTextField input1 = new JTextField("");
-       JTextField input2 = new JTextField("");
-       JTextField input3 = new JTextField("");
+       this.diameter = new JTextField("10");
+       this.diameter.setInputVerifier(new InputValidator());
+       this.spotsPercentage = new JTextField("10");
+       this.spotsPercentage.setInputVerifier(new InputValidator());
+       this.redIntensity = new JTextField("10");
+       this.redIntensity.setInputVerifier(new InputValidator());
        
        formPanel.add(labelInput1);
-       formPanel.add(input1);
+       formPanel.add(this.diameter);
        formPanel.add(labelInput2);
-       formPanel.add(input2);
+       formPanel.add(this.redIntensity);
        formPanel.add(labelInput3);
-       formPanel.add(input3);
+       formPanel.add(this.spotsPercentage);
         
        formPanel.setPreferredSize(new Dimension(300, 300));
        formPanel.setBounds(250, 100, 300, 150);
@@ -90,7 +103,9 @@ public class AppleUI extends JFrame {
        getReport.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
        
        buttonActionsPanel.add(calculate);
-       buttonActionsPanel.add(getReport);
+
+       
+       calculate.addActionListener(new CalculateListener(this));
        
        buttonActionsPanel.setBounds(250, 300, 300, 45);
        buttonActionsPanel.setBackground(BACKGROUND_COLOR);
@@ -98,11 +113,35 @@ public class AppleUI extends JFrame {
    }
    
    public void createResultsPanel() {
-       JTextArea textArea = new JTextArea (400, 250);
+       textArea = new JTextArea (400, 250);
        JScrollPane resultsPanel = new JScrollPane(textArea);
        
        resultsPanel.setBounds(200, 370, 400, 250);
        contentPanel.add(resultsPanel);
+   }
+   
+   public String getDiameter(){
+       return this.diameter.getText();
+   }
+   
+   public String getRedIntensity(){
+       return this.redIntensity.getText();
+   }
+   
+   public String getSpotsPercentage(){
+       return this.spotsPercentage.getText();
+   }
+   
+   public void showResults(double quality, List<Rule> rules) {
+       StringBuilder rulesString = new StringBuilder();
+       for(Rule rule : rules) {
+           rulesString.append(rule.toString()).append("\n");
+       }
+       this.textArea.setText("Quality: " + quality + "\n\n" + rulesString.toString());
+   }
+   
+   public void showError(String message) {
+       JOptionPane.showMessageDialog(new JFrame(), message);
    }
    
    public static void main(String [] args) {
