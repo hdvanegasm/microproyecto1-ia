@@ -21,9 +21,9 @@ public class ModelTest {
             System.exit(1);
         }
         
-        fuzzyModel.setVariable("size", 60);
-        fuzzyModel.setVariable("red_color", 0.27);
-        fuzzyModel.setVariable("spots", 0.345);
+        fuzzyModel.setVariable("size", 80);
+        fuzzyModel.setVariable("red_color", 0.90);
+        fuzzyModel.setVariable("spots", 0.05);
         
         fuzzyModel.evaluate();
         
