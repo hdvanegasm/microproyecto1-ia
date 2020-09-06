@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import controller.CalculateListener;
 import view.InputValidator;
+import java.util.List;
+import net.sourceforge.jFuzzyLogic.rule.Rule;
 /**
  *
  * @author pvillegasg
@@ -17,6 +19,7 @@ public class AppleUI extends JFrame {
    private JTextField diameter;
    private JTextField spotsPercentage;
    private JTextField redIntensity;
+   private JTextArea textArea;
    
    public AppleUI() {
       super("Apple Expert System");
@@ -100,15 +103,9 @@ public class AppleUI extends JFrame {
        getReport.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
        
        buttonActionsPanel.add(calculate);
-       buttonActionsPanel.add(getReport);
+
        
-       
-       
-       String diameter = this.diameter.getText();
-       String redIntensity = this.redIntensity.getText();
-       String spotsPercentage = this.spotsPercentage.getText();
-       
-       calculate.addActionListener(new CalculateListener(diameter, redIntensity, spotsPercentage));
+       calculate.addActionListener(new CalculateListener(this));
        
        buttonActionsPanel.setBounds(250, 300, 300, 45);
        buttonActionsPanel.setBackground(BACKGROUND_COLOR);
@@ -116,11 +113,35 @@ public class AppleUI extends JFrame {
    }
    
    public void createResultsPanel() {
-       JTextArea textArea = new JTextArea (400, 250);
+       textArea = new JTextArea (400, 250);
        JScrollPane resultsPanel = new JScrollPane(textArea);
        
        resultsPanel.setBounds(200, 370, 400, 250);
        contentPanel.add(resultsPanel);
+   }
+   
+   public String getDiameter(){
+       return this.diameter.getText();
+   }
+   
+   public String getRedIntensity(){
+       return this.redIntensity.getText();
+   }
+   
+   public String getSpotsPercentage(){
+       return this.spotsPercentage.getText();
+   }
+   
+   public void showResults(double quality, List<Rule> rules) {
+       StringBuilder rulesString = new StringBuilder();
+       for(Rule rule : rules) {
+           rulesString.append(rule.toString()).append("\n");
+       }
+       this.textArea.setText("Quality: " + quality + "\n\n" + rulesString.toString());
+   }
+   
+   public void showError(String message) {
+       JOptionPane.showMessageDialog(new JFrame(), message);
    }
    
    public static void main(String [] args) {

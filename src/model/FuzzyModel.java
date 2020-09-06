@@ -31,10 +31,9 @@ public class FuzzyModel {
 
     private static void evaluateModel(
             double size, double redLevel, double spots) {
-        // TODO fix variable names
         FIS fuzzyModel = getModel();
         fuzzyModel.setVariable("size", size);
-        fuzzyModel.setVariable("red_level", redLevel);
+        fuzzyModel.setVariable("red_color", redLevel);
         fuzzyModel.setVariable("spots", spots);
         fuzzyModel.evaluate();
     }
