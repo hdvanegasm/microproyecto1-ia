@@ -115,11 +115,11 @@ public class AppleUI extends JFrame {
    }
    
    public void createResultsPanel() {
-       textArea = new JTextArea (550, 300);
+       textArea = new JTextArea (700, 300);
        textArea.setEditable(false);
        JScrollPane resultsPanel = new JScrollPane(textArea);
        
-       resultsPanel.setBounds(130, 370, 550, 300);
+       resultsPanel.setBounds(45, 370, 700, 300);
        contentPanel.add(resultsPanel);
    }
    
