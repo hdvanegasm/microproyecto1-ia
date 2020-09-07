@@ -82,6 +82,8 @@ RULEBLOCK No1
         THEN quality IS low;
     RULE 17 : IF size IS small AND red_color IS medium_red AND spots IS medium
         THEN quality IS low;
+    RULE 18 : IF spots IS critical
+        THEN quality IS low;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
