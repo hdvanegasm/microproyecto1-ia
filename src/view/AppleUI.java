@@ -43,7 +43,8 @@ public class AppleUI extends JFrame {
    
     public void createWelcomeMenuPanel() {
        JPanel welcomeMenuPanel = new JPanel();
-       JLabel systemTitle = new JLabel("Fuzzy Logic System of Apples", SwingConstants.CENTER);
+       JLabel systemTitle = new JLabel("Fuzzy Logic System of Apples",
+               SwingConstants.CENTER);
        systemTitle.setPreferredSize(new Dimension(300, 100));
        systemTitle.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        welcomeMenuPanel.add(systemTitle);
@@ -132,12 +133,26 @@ public class AppleUI extends JFrame {
        return this.spotsPercentage.getText();
    }
    
-   public void showResults(double quality, List<Rule> rules) {
+   public void showResults(
+           double quality, 
+           List<Rule> rules,
+           double outputLowMembership,
+           double outputMediumMembership,
+           double outputPremiumMembership) {
+       
        StringBuilder rulesString = new StringBuilder();
-       for(Rule rule : rules) {
+       rules.forEach((rule) -> {
            rulesString.append(rule.toString()).append("\n");
-       }
-       this.textArea.setText("Quality: " + quality + "\n\n" + rulesString.toString());
+       });
+       
+       String membership = "OUTPUT MEMBERSHIP" +
+            "\n\tLow quality membership: " + outputLowMembership +
+            "\n\tMedium quality membership: " + outputMediumMembership +
+            "\n\tPremium quality membership: " + outputPremiumMembership;
+       
+       this.textArea.setText("Quality: " + quality +
+               "\n" + membership +
+               "\n\n" + rulesString.toString());
    }
    
    public void showError(String message) {

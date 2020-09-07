@@ -31,7 +31,9 @@ public class CalculateListener implements ActionListener {
         String diameter = this.view.getDiameter();
         String spotsPercentage = this.view.getSpotsPercentage();
         String redIntensity = this.view.getRedIntensity();
-        if (!diameter.isEmpty() && !spotsPercentage.isEmpty() && !redIntensity.isEmpty()) {
+        if (!diameter.isEmpty() && 
+                !spotsPercentage.isEmpty() && 
+                !redIntensity.isEmpty()) {
             double diameterInput = Double.parseDouble(diameter);
             double spotsPercentageInput = Double.parseDouble(spotsPercentage);
             double redIntensityInput = Double.parseDouble(redIntensity);
@@ -50,7 +52,30 @@ public class CalculateListener implements ActionListener {
                 List<Rule> rules = FuzzyModel.getRules(
                         diameterInput, redIntensityInput, spotsPercentageInput
                 );
-                view.showResults(quality, rules);
+                
+                double outputLowMembership = FuzzyModel
+                        .getOutputLowMembership(
+                        diameterInput, redIntensityInput, spotsPercentageInput 
+                );
+                
+                double outputMediumMembership = FuzzyModel
+                        .getOutputMediumMembership(
+                        diameterInput, redIntensityInput, spotsPercentageInput 
+                );
+                
+                double outputPremiumMembership = FuzzyModel
+                        .getOutputPremiumMembership(
+                        diameterInput, redIntensityInput, spotsPercentageInput 
+                );
+                
+                view.showResults(
+                        quality, 
+                        rules,
+                        outputLowMembership,
+                        outputMediumMembership,
+                        outputPremiumMembership
+                );
+                
                 JFuzzyChart.get().chart(FuzzyModel
                         .getModel()
                         .getFunctionBlock("quality"));
