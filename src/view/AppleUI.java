@@ -109,7 +109,6 @@ public class AppleUI extends JFrame {
        calculate.setBackground(Color.WHITE);
        calculate.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
        calculate.addActionListener(new CalculateListener(this));
-       calculate.setBackground(BACKGROUND_COLOR);
        calculate.setBounds(300, 300, 200, 45);
        contentPanel.add(calculate);
    }
