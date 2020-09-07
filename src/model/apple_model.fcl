@@ -77,7 +77,11 @@ RULEBLOCK No1
     RULE 14 : IF size IS large AND red_color IS low_red 
         THEN quality IS medium;  
     RULE 15 : IF size IS large AND red_color IS medium_red 
-        THEN quality IS medium; 
+        THEN quality IS medium;
+    RULE 16 : IF size IS small AND red_color IS medium_red AND spots IS critical
+        THEN quality IS low;
+    RULE 17 : IF size IS small AND red_color IS medium_red AND spots IS medium
+        THEN quality IS low;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

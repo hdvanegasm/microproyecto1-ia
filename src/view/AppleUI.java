@@ -28,6 +28,7 @@ public class AppleUI extends JFrame {
 
       this.setLayout(null);
       this.createWelcomeMenuPanel();
+      this.drawAppleImage();
       this.createFormPanel();
       this.createActionsPanel();
       this.createResultsPanel();
@@ -39,6 +40,7 @@ public class AppleUI extends JFrame {
       this.setLocationRelativeTo(null);
       this.setVisible(true);
       this.getContentPane().setBackground(BACKGROUND_COLOR);
+      this.showWelcomeDialog();
    }
    
     public void createWelcomeMenuPanel() {
@@ -51,6 +53,16 @@ public class AppleUI extends JFrame {
        welcomeMenuPanel.setBounds(260, 0, 280, 80);
        welcomeMenuPanel.setBackground(BACKGROUND_COLOR);
        contentPanel.add(welcomeMenuPanel);
+    }
+    
+    public void showWelcomeDialog() {
+        String welcome = "Welcome to the Apple Expert System \n\t" +
+            "\n\tPlease keep in mind the following values before entering inputs: " +
+            "\n\n\tDiameter (mm): 50 - 90 " +
+            "\n\tRed intensity (percentage) : 0 - 1 " +
+            "\n\tSpot Percentage (percentage) : 0 - 1 ";
+        
+        JOptionPane.showMessageDialog(new JFrame(), welcome);
     }
     
     
@@ -70,11 +82,11 @@ public class AppleUI extends JFrame {
        JLabel labelInput3 = new JLabel("Spot Percentage", SwingConstants.LEFT);
        labelInput3.setFont(new Font(MAIN_FONT, Font.BOLD, 16));
        
-       this.diameter = new JTextField("10");
+       this.diameter = new JTextField("");
        this.diameter.setInputVerifier(new InputValidator());
-       this.spotsPercentage = new JTextField("10");
+       this.spotsPercentage = new JTextField("");
        this.spotsPercentage.setInputVerifier(new InputValidator());
-       this.redIntensity = new JTextField("10");
+       this.redIntensity = new JTextField("");
        this.redIntensity.setInputVerifier(new InputValidator());
        
        formPanel.add(labelInput1);
@@ -92,33 +104,30 @@ public class AppleUI extends JFrame {
     
    public void createActionsPanel() {
        JPanel buttonActionsPanel = new JPanel();
-       GridLayout buttonsLayout = new GridLayout(1,2);
-       buttonsLayout.setHgap(25);
-       buttonActionsPanel.setLayout(buttonsLayout);
        
        JButton calculate = new JButton("Calculate");
        calculate.setBackground(Color.WHITE);
        calculate.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
-       JButton getReport = new JButton("Get Report");
-       getReport.setBackground(Color.WHITE);
-       getReport.setFont(new Font(MAIN_FONT, Font.BOLD, 14));
-       
-       buttonActionsPanel.add(calculate);
-
-       
        calculate.addActionListener(new CalculateListener(this));
-       
-       buttonActionsPanel.setBounds(250, 300, 300, 45);
-       buttonActionsPanel.setBackground(BACKGROUND_COLOR);
-       contentPanel.add(buttonActionsPanel);
+       calculate.setBackground(BACKGROUND_COLOR);
+       calculate.setBounds(300, 300, 200, 45);
+       contentPanel.add(calculate);
    }
    
    public void createResultsPanel() {
-       textArea = new JTextArea (400, 250);
+       textArea = new JTextArea (550, 300);
+       textArea.setEditable(false);
        JScrollPane resultsPanel = new JScrollPane(textArea);
        
-       resultsPanel.setBounds(200, 370, 400, 250);
+       resultsPanel.setBounds(130, 370, 550, 300);
        contentPanel.add(resultsPanel);
+   }
+   
+   public void drawAppleImage() {
+       JLabel imageLabel = new JLabel();
+       imageLabel.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resources/Apple.jpg")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+       imageLabel.setBounds(100, 125, 100, 100);
+       contentPanel.add(imageLabel);
    }
    
    public String getDiameter(){
