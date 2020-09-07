@@ -47,10 +47,33 @@ public class FuzzyModel {
     public static List<Rule> getRules(
             double size, double redColor, double spots) {
         evaluateModel(size, redColor, spots);
-
         return getModel()
                 .getFunctionBlock("quality")
                 .getFuzzyRuleBlock("No1")
                 .getRules();
+    }
+    
+    public static double getOutputLowMembership(
+        double size, double redColor, double spots){
+        evaluateModel(size, redColor, spots);
+        return getModel()
+                .getVariable("quality")
+                .getMembership("low");
+    }
+    
+    public static double getOutputMediumMembership(
+        double size, double redColor, double spots){
+        evaluateModel(size, redColor, spots);
+        return getModel()
+                .getVariable("quality")
+                .getMembership("medium");
+    }
+    
+    public static double getOutputPremiumMembership(
+        double size, double redColor, double spots){
+        evaluateModel(size, redColor, spots);
+        return getModel()
+                .getVariable("quality")
+                .getMembership("premium");
     }
 }
