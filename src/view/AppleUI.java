@@ -8,6 +8,7 @@ import controller.CalculateListener;
 import view.InputValidator;
 import java.util.List;
 import net.sourceforge.jFuzzyLogic.rule.Rule;
+import model.FuzzyModel;
 /**
  *
  * @author pvillegasg
@@ -25,6 +26,9 @@ public class AppleUI extends JFrame {
       super("Apple Expert System");
       contentPanel = new JPanel();
       this.setContentPane(contentPanel);
+      
+      
+      FuzzyModel.getModel();
 
       this.setLayout(null);
       this.createWelcomeMenuPanel();

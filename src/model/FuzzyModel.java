@@ -9,6 +9,9 @@ package model;
  *
  * @author user
  */
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.rule.Rule;
 
@@ -20,9 +23,8 @@ public class FuzzyModel {
 
     public static FIS getModel() {
         if (model == null) {
-            // TODO Implement .fcl
-            String filePath = "src/model/apple_model.fcl";
-            model = FIS.load(filePath);
+            InputStream in = FuzzyModel.class.getResourceAsStream("apple_model.fcl"); 
+            model = FIS.load(in, true);
             return model;
         } else {
             return model;
