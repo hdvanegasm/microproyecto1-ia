@@ -9,9 +9,7 @@ package model;
  *
  * @author user
  */
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.rule.Rule;
 
