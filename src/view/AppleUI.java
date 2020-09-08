@@ -8,6 +8,7 @@ import controller.CalculateListener;
 import view.InputValidator;
 import java.util.List;
 import net.sourceforge.jFuzzyLogic.rule.Rule;
+import model.FuzzyModel;
 /**
  *
  * @author pvillegasg
