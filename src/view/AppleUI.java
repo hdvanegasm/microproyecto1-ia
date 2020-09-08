@@ -147,10 +147,24 @@ public class AppleUI extends JFrame {
            double outputLowMembership,
            double outputMediumMembership,
            double outputPremiumMembership) {
+       String conclusionMessage = "";
+       if(outputLowMembership >= outputMediumMembership &&
+               outputLowMembership >= outputPremiumMembership) {
+           conclusionMessage = "CONCLUSION: the apple has a bad quality";
+       } else if(outputMediumMembership >= outputLowMembership &&
+               outputMediumMembership >= outputPremiumMembership) {
+           conclusionMessage = "CONCLUSION: the apple has a bad quality";
+       } else if(outputPremiumMembership >= outputLowMembership &&
+               outputPremiumMembership >= outputMediumMembership) {
+           conclusionMessage = "CONCLUSION: the apple has a medium quality";
+       }
        
        StringBuilder rulesString = new StringBuilder();
+       rulesString.append("USED RULES:\n");
        rules.forEach((rule) -> {
-           rulesString.append(rule.toString()).append("\n");
+           if(rule.getDegreeOfSupport() > 0) {
+               rulesString.append(rule.toString()).append("\n");
+           }
        });
        
        String membership = "OUTPUT MEMBERSHIP" +
@@ -159,7 +173,8 @@ public class AppleUI extends JFrame {
             "\n\tPremium quality membership: " + outputPremiumMembership;
        
        this.textArea.setText("Quality: " + quality +
-               "\n" + membership +
+               "\n\n" + conclusionMessage +
+               "\n\n" + membership +
                "\n\n" + rulesString.toString());
    }
    
