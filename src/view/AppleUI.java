@@ -26,9 +26,6 @@ public class AppleUI extends JFrame {
       super("Apple Expert System");
       contentPanel = new JPanel();
       this.setContentPane(contentPanel);
-      
-      
-      FuzzyModel.getModel();
 
       this.setLayout(null);
       this.createWelcomeMenuPanel();
