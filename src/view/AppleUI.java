@@ -150,13 +150,13 @@ public class AppleUI extends JFrame {
        String conclusionMessage = "";
        if(outputLowMembership >= outputMediumMembership &&
                outputLowMembership >= outputPremiumMembership) {
-           conclusionMessage = "CONCLUSION: the apple has a bad quality";
+           conclusionMessage = "CONCLUSION: the apple has a bad quality according to the industry parameters.";
        } else if(outputMediumMembership >= outputLowMembership &&
                outputMediumMembership >= outputPremiumMembership) {
-           conclusionMessage = "CONCLUSION: the apple has a bad quality";
+           conclusionMessage = "CONCLUSION: the apple has a medium quality and it could be sold at a low price.";
        } else if(outputPremiumMembership >= outputLowMembership &&
                outputPremiumMembership >= outputMediumMembership) {
-           conclusionMessage = "CONCLUSION: the apple has a medium quality";
+           conclusionMessage = "CONCLUSION: the apple has a premium quality. It could be chosen as a select product.";
        }
        
        StringBuilder rulesString = new StringBuilder();
