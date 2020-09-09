@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package controller;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 /**
  *
  * @author pvillegasg
