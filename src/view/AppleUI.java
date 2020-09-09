@@ -5,10 +5,9 @@ import java.awt.*; // TO DO : Fix those imports.
 import java.awt.event.ActionListener;
 
 import controller.CalculateListener;
-import view.InputValidator;
+import java.awt.event.ActionEvent;
 import java.util.List;
 import net.sourceforge.jFuzzyLogic.rule.Rule;
-import model.FuzzyModel;
 /**
  *
  * @author pvillegasg
@@ -28,6 +27,7 @@ public class AppleUI extends JFrame {
       this.setContentPane(contentPanel);
 
       this.setLayout(null);
+      this.createAboutMenu();
       this.createWelcomeMenuPanel();
       this.drawAppleImage();
       this.createFormPanel();
@@ -54,6 +54,53 @@ public class AppleUI extends JFrame {
        welcomeMenuPanel.setBounds(260, 0, 280, 80);
        welcomeMenuPanel.setBackground(BACKGROUND_COLOR);
        contentPanel.add(welcomeMenuPanel);
+    }
+    
+    public void createAboutMenu() {
+        JMenuBar menuBar=new JMenuBar();
+        
+        this.setJMenuBar(menuBar); 
+        JMenu informationMenu = new JMenu("Information");
+        JMenuItem aboutItem = new JMenuItem("About");
+        informationMenu.add(aboutItem);
+        
+        
+        JMenuItem authors = new JMenuItem("Authors");
+        informationMenu.add(authors);
+        
+        
+        aboutItem.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String aboutString = "About \n\t" +
+                                     "\n\t This is a software that helps apple growers" +
+                                     "\n\t to rate the apples based on computer vision inputs.  " +
+                                     "\n\t The quality of the apple is calculated according to " +
+                                     "\n\t the diameter, red intensity and spots in the surface. " +
+                                     "\n\t The computation of the quality is executed using Fuzzy" +
+                                     "\n\t Logic with Mamdani approach.";
+        
+                JOptionPane.showMessageDialog(new JFrame(), aboutString);
+            }
+        
+        });
+        
+        
+        authors.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String authorsString = "Authors \n\t" +
+                                  "\n\tHernán Dario Vanegas Madrigal" +
+                                  "\n\tSantiago Montoya Palacio" +
+                                  "\n\tJuan Pablo Villegas Gómez";
+        
+                JOptionPane.showMessageDialog(new JFrame(), authorsString);
+            }
+        
+        });
+        menuBar.add(informationMenu);
     }
     
     public void showWelcomeDialog() {
